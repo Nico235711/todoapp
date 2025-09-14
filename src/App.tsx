@@ -1,10 +1,14 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import TodoForm from "./components/TodoForm";
 import { initialState, todoReducer } from "./reducer/todoReducer";
 import TodoList from "./components/TodoList";
 
 export default function App() {
   const [state, dispatch] = useReducer(todoReducer, initialState)
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(state.todos))
+  }, [state.todos]);
 
   const handleToggle = (id: number) => {
     dispatch({ type: "TOGGLE", payload: id })

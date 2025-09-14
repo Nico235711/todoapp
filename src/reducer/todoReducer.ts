@@ -9,8 +9,13 @@ export type TodoState = {
   todos: Todo[]
 }
 
+const INITIAL_TODOS = () : Todo[] => {
+  const storedTodos = localStorage.getItem("todos")
+  return storedTodos ? JSON.parse(storedTodos) : []
+}
+
 export const initialState: TodoState = {
-  todos: []
+  todos: INITIAL_TODOS()
 }
 
 export const todoReducer = (state: TodoState = initialState, action: TodoAction) => {
